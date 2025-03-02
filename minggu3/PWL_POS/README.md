@@ -42,4 +42,4 @@ Tanda `?` digunakan sebagai placeholder dalam query, sehingga parameter yang dib
 protected $primaryKey = 'user_id'; → Menentukan primary key yang digunakan oleh tabel tersebut.
 
 12. Menurut kalian, lebih mudah menggunakan mana dalam melakukan operasi CRUD ke database (DB Façade / Query Builder / Eloquent ORM)? Jelaskan.
-Eloquent ORM biasanya lebih mudah digunakan karena menyediakan abstraksi berbasis objek, sehingga kita bisa berinteraksi dengan database tanpa harus menulis query SQL secara langsung. Namun, jika butuh fleksibilitas lebih, Query Builder atau bahkan DB Facade bisa menjadi pilihan tergantung kebutuhan proyek.
+>> Eloquent ORM biasanya lebih mudah digunakan karena menyediakan abstraksi berbasis objek, sehingga kita bisa berinteraksi dengan database tanpa harus menulis query SQL secara langsung. Namun, jika butuh fleksibilitas lebih, Query Builder atau bahkan DB Facade bisa menjadi pilihan tergantung kebutuhan proyek.
