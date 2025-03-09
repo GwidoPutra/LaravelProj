@@ -18,13 +18,14 @@
             <th>Nama</th>
             <th>ID Level Pengguna</th>
         </tr>
-        <!-- @foreach ($data as $d) -->
+        @foreach ($data as $d)
             <tr>
                 <td>{{ $data->user_id }}</td>
                 <td>{{ $data->username }}</td>
                 <td>{{ $data->nama }}</td>
                 <td>{{ $data->level_id }}</td>
+                <td><a href="user/ubah/{{ $d->user_id }}">Ubah</a> | <a href="/user/hapus/{{ $d->user_id }}">Hapus</a></td>
             </tr>
-        <!-- @endforeach -->
+        @endforeach
     </table>
 </body>
