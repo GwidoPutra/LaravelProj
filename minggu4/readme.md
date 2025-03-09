@@ -46,17 +46,18 @@ Menggunakan method wasChanged untuk mengecek apakah ada perubahan data sejak ter
 
 ## Praktikum 2.6 – CRUD (Create, Read, Update, Delete)
 ### Langkah 3
-Menggunakan method all untuk mengambil semua data dari tabel dan menampilkannya di halaman browser
+Tampilan baru dengan link tambah user dan aksi ubah/hapus.
 ### Langkah 7
-Menggunakan form HTML untuk menambahkan data baru. Saat tombol "+ Tambah User" diklik, seharusnya form input muncul.
+Menggunakan form HTML untuk menambahkan data baru. Saat tombol "+ Tambah User"
 ### Langkah 10
-Menggunakan method create untuk menyimpan data yang dikirim dari form input ke dalam database.
+Menambah data ke database
 ### Langkah 14
-Menggunakan method find untuk mengambil data yang akan diedit dan menampilkannya dalam form update.
+Menggunakan form edit dengan value sesuai data dipilih.
 ### Langkah 17
 Menggunakan method update untuk menyimpan perubahan data yang telah diedit
 ### Langkah 20
-Menggunakan method delete untuk menghapus data berdasarkan ID yang diberikan.
+Menggunakan method delete untuk menghapus data berdasarkan ID yang diberikan. Data dapat dihapus setelah menambahkan route dan controller untuk hapus.
+
 
 ## Praktikum 2.7 – Relationships
 ## Langaah 3
