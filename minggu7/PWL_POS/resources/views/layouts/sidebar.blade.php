@@ -65,5 +65,14 @@
                 </a>
             </li>           
         </ul>
+
+        <div class="mt-auto mb-3 px-3">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-danger btn-block">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </form>
+        </div>
     </nav>
 </div>

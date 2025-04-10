@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+   Route::get('/', [WelcomeController::class,'index']);
+
 
 
 Route::group(['prefix' => 'user'], function () {
@@ -112,6 +114,13 @@ Route::group(['prefix' => 'supplier'], function(){
    Route::delete('/{id}', [SupplierController::class, 'destroy']);
 });
 
+Route::post('/logout', function () {
+   Auth::logout();
+   request()->session()->invalidate();
+   request()->session()->regenerateToken();
+   return redirect('/login');
+})->name('logout');
+
 Route::pattern('id', '[0-9]+');
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
@@ -119,5 +128,4 @@ Route::post('login', [AuthController::class, 'postLogin']);
 Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
 
 Route::middleware(['auth'])->group(function () {
-   Route::get('/', [WelcomeController::class,'index']);
 });
