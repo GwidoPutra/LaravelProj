@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder; //untuk memanggil Seeder
-use Illuminate\Support\Facades\DB; //untuk memanggil DB
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class KategoriSeeder extends Seeder
 {
@@ -14,27 +15,27 @@ class KategoriSeeder extends Seeder
     {
         $data = [
             [
-                'kategori_kode' => 'ELC001',
-                'kategori_nama' => 'Elektronik',
+                'kategori_kode' => 'CAT001',
+                'kategori_nama' => 'Electronics',
             ],
             [
-                'kategori_kode' => 'FNB002',
-                'kategori_nama' => 'Makanan & Minuman',
+                'kategori_kode' => 'CAT002',
+                'kategori_nama' => 'Clothing',
             ],
             [
-                'kategori_kode' => 'FRN003',
+                'kategori_kode' => 'CAT003',
+                'kategori_nama' => 'Books',
+            ],
+            [
+                'kategori_kode' => 'CAT004',
                 'kategori_nama' => 'Furniture',
             ],
             [
-                'kategori_kode' => 'CLT004',
-                'kategori_nama' => 'Pakaian',
-            ],
-            [
-                'kategori_kode' => 'SPR005',
-                'kategori_nama' => 'Olahraga',
+                'kategori_kode' => 'CAT005',
+                'kategori_nama' => 'Sports Equipment',
             ],
         ];
 
-        DB::table('m_kategori')->insert($data); //insert data
+        DB::table('m_kategori')->insert($data);
     }
 }
