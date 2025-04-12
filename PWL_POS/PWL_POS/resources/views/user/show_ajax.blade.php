@@ -7,27 +7,36 @@
             </button>
         </div>
         <div class="modal-body">
-            <table class="table table-bordered table-striped table-hover table-sm">
-                <tr>
-                    <th>ID</th>
-                    <td>{{ $user->user_id }}</td>
-                </tr>
-                <tr>
-                    <th>Level</th>
-                    <td>{{ $user->level->level_nama }}</td>
-                </tr>
-                <tr>
-                    <th>Username</th>
-                    <td>{{ $user->username }}</td>
-                </tr>
-                <tr>
-                    <th>Nama</th>
-                    <td>{{ $user->nama }}</td>
-                </tr>
-                <tr>
-                    <th>Password</th>
-                    <td>********</td>
-                </tr>
-            </table>
-        </div>
+            <div class="d-flex align-items-start align-items-center">
+                <div class="mr-4">
+                    <img src="{{ $user->profile_picture ?? asset('profile_default.png') }}" alt="Foto Profil" class="rounded-circle"
+                        style="width: 150px; height: 150px; object-fit: cover;">
+                </div>
+
+                <div class="flex-grow-1">
+                    <table class="table table-bordered table-striped table-hover table-sm">
+                        <tr>
+                            <th class="text-nowrap" style="width: 90px;">ID</th>
+                            <td>{{ $user->user_id }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-nowrap">Level</th>
+                            <td>{{ $user->level->level_nama }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-nowrap">Username</th>
+                            <td>{{ $user->username }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-nowrap">Nama</th>
+                            <td>{{ $user->nama }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-nowrap">Password</th>
+                            <td>********</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
     </div>
+</div>

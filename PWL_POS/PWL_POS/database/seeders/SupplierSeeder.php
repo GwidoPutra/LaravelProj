@@ -15,24 +15,28 @@ class SupplierSeeder extends Seeder
                 'supplier_kode' => 'SUP001',
                 'supplier_nama' => 'PT Maju Bersama',
                 'supplier_alamat' => 'Jl. Merdeka No. 10, Jakarta',
+                'supplier_telepon' => '081266753432',
             ],
             [
                 'supplier_id' => 2,
                 'supplier_kode' => 'SUP002',
                 'supplier_nama' => 'CV Sukses Selalu',
                 'supplier_alamat' => 'Jl. Kemerdekaan No. 22, Bandung',
+                'supplier_telepon' => '088952739980',
             ],
             [
                 'supplier_id' => 3,
                 'supplier_kode' => 'SUP003',
                 'supplier_nama' => 'UD Jaya Abadi',
                 'supplier_alamat' => 'Jl. Pahlawan No. 15, Surabaya',
+                'supplier_telepon' => '088250432275',
             ],
             [
                 'supplier_id' => 4,
                 'supplier_kode' => 'SUP004',
                 'supplier_nama' => 'Toko Makmur Sejahtera',
                 'supplier_alamat' => 'Jl. Diponegoro No. 5, Medan',
+                'supplier_telepon' => '088995429322',
             ],
         ]);
     }

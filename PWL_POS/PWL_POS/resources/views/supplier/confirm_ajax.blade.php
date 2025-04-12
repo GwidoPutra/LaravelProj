@@ -89,6 +89,16 @@
                                 });
                             }
                         },
+                        // custom catch error
+                        // error: function(error) {
+                        //     Swal.fire({
+                        //         icon: 'error',
+                        //         title: 'Terjadi Kesalahan',
+                        //         text: 'Gagal menghapus data: ' + error.statusText
+                        //     });
+                        // }
+                        //
+                    });
                     return false;
                 },
                 errorElement: 'span',

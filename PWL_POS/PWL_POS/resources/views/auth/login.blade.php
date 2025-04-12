@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login Pengguna</title>
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- icheck bootstrap -->
@@ -21,15 +22,13 @@
     <div class="login-box">
         <!-- /.login-logo -->
         <div class="card card-outline card-primary">
-            <div class="card-header text-center"><a href="{{ url('/') }}"
-                    class="h1"><b>Admin</b>LTE</a></div>
+            <div class="card-header text-center"><a href="{{ url('/') }}" class="h1"><b>Admin</b>LTE</a></div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
                 <form action="{{ url('/login') }}" method="POST" id="form-login">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" id="username" name="username" class="form-control"
-                            placeholder="Username">
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -42,11 +41,12 @@
                             placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-lock"></span>
+                                <span class="fas fa-lock" id="toggle-password" style="cursor: pointer;"></span>
                             </div>
                         </div>
                         <small id="error-password" class="error-text text-danger"></small>
                     </div>
+
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
@@ -61,7 +61,7 @@
                     </div>
                 </form>
                 <p class="mt-4 mb-0 text-center">
-                     Belum punya akun? <a href="{{ url('register') }}" >Daftar disini</a>
+                    Belum punya akun? <a href="{{ url('register') }}">Click here</a>
             </div>
             <!-- /.card-body -->
         </div>
@@ -88,7 +88,20 @@
             }
         });
 
-        $(document).ready(function() {
+        $(document).ready(function () {
+            // Toggle show/hide password
+            $('#toggle-password').on('click', function () {
+                const passwordInput = $('#password');
+                const icon = $(this);
+                if (passwordInput.attr('type') === 'password') {
+                    passwordInput.attr('type', 'text');
+                    icon.removeClass('fa-lock').addClass('fa-unlock');
+                } else {
+                    passwordInput.attr('type', 'password');
+                    icon.removeClass('fa-unlock').addClass('fa-lock');
+                }
+            });
+
             $("#form-login").validate({
                 rules: {
                     username: {
@@ -102,23 +115,23 @@
                         maxlength: 20
                     }
                 },
-                submitHandler: function(form) { // ketika valid, maka bagian yg akan dijalankan 
+                submitHandler: function (form) { // ketika valid, maka bagian yg akan dijalankan 
                     $.ajax({
                         url: form.action,
                         type: form.method,
                         data: $(form).serialize(),
-                        success: function(response) {
+                        success: function (response) {
                             if (response.status) { // jika sukses 
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Berhasil',
                                     text: response.message,
-                                }).then(function() {
+                                }).then(function () {
                                     window.location = response.redirect;
                                 });
                             } else { // jika error 
                                 $('.error-text').text('');
-                                $.each(response.msgField, function(prefix, val) {
+                                $.each(response.msgField, function (prefix, val) {
                                     $('#error-' + prefix).text(val[0]);
                                 });
                                 Swal.fire({
@@ -132,14 +145,14 @@
                     return false;
                 },
                 errorElement: 'span',
-                errorPlacement: function(error, element) {
+                errorPlacement: function (error, element) {
                     error.addClass('invalid-feedback');
                     element.closest('.input-group').append(error);
                 },
-                highlight: function(element, errorClass, validClass) {
+                highlight: function (element, errorClass, validClass) {
                     $(element).addClass('is-invalid');
                 },
-                unhighlight: function(element, errorClass, validClass) {
+                unhighlight: function (element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
                 }
             });
