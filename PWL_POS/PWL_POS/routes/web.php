@@ -36,6 +36,9 @@ Route::post('register', [AuthController::class, 'postRegister']);
 
 Route::middleware(['auth'])->group(function () {
    Route::get('/', [WelcomeController::class, 'index']);
+   Route::get('/{id}/edit_profile', [UserController::class,'edit_profile']);
+   Route::put('/{id}/update_ajax', [UserController::class,'update_ajax']);
+
 
    // artinya semua route di dalam group ini harus punya role ADM
    Route::middleware(['authorize:ADM'])->group(function () {
