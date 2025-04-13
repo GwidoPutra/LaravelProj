@@ -44,7 +44,7 @@
                     <tr>
                         <th>No</th>
                         <th>Kode Penjualan</th>
-                        <th>Nama User</th>
+                        <th>Nama Staf</th>
                         <th>Nama Pembeli</th>
                         <th>Tanggal</th>
                         <th>Aksi</th>

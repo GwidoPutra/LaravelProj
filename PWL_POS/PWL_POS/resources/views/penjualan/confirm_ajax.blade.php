@@ -2,7 +2,7 @@
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Kesalahan</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Kesalahan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <div class="alert alert-danger">
                     <h5><i class="icon fas fa-ban"></i> Kesalahan!!!</h5>
-                    Data penjualan tidak ditemukan.
+                    Data yang anda cari tidak ditemukan
                 </div>
                 <a href="{{ url('/penjualan') }}" class="btn btn-warning">Kembali</a>
             </div>
@@ -23,48 +23,52 @@
         <div id="modal-master" class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Hapus Data Penjualan</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Hapus Data Penjualan</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="alert alert-warning">
-                        <h5><i class="icon fas fa-exclamation-triangle"></i> Konfirmasi !!!</h5>
-                        Apakah Anda yakin ingin menghapus data berikut?
+                        <h5><i class="icon fas fa-ban"></i> Konfirmasi !!!</h5>
+                        Apakah Anda ingin menghapus data seperti di bawah ini?
                     </div>
                     <table class="table table-sm table-bordered table-striped">
                         <tr>
-                            <th class="text-right col-3">Kode Penjualan:</th>
-                            <td class="col-9">{{ $penjualan->penjualan_kode }}</td>
+                            <th class="text-left col-3">ID:</th>
+                            <td class="col-9">{{ $penjualan->penjualan_id }}</td>
                         </tr>
                         <tr>
-                            <th class="text-right col-3">Tanggal Penjualan:</th>
-                            <td class="col-9">{{ $penjualan->penjualan_tanggal }}</td>
-                        </tr>
-                        <tr>
-                            <th class="text-right col-3">Nama Pembeli:</th>
+                            <th class="text-left col-3">Nama Pembeli:</th>
                             <td class="col-9">{{ $penjualan->pembeli }}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-left col-3">User:</th>
+                            <td class="col-9">{{ $penjualan->user->nama }} ({{ $penjualan->user->level->level_nama }})</td>
+                        </tr>
+                        <tr>
+                            <th class="text-left col-3">Tanggal:</th>
+                            <td class="col-9">{{ $penjualan->penjualan_tanggal }}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
+                    <button type="submit" class="btn btn-primary">Ya, Hapus</button>
                 </div>
             </div>
         </div>
     </form>
-
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             $("#form-delete").validate({
-                submitHandler: function (form) {
+                rules: {},
+                submitHandler: function(form) {
                     $.ajax({
                         url: form.action,
                         type: form.method,
                         data: $(form).serialize(),
-                        success: function (response) {
+                        success: function(response) {
                             if (response.status) {
                                 $('#myModal').modal('hide');
                                 Swal.fire({
@@ -72,27 +76,31 @@
                                     title: 'Berhasil',
                                     text: response.message
                                 });
-                                $('#table_penjualan').DataTable().ajax.reload();
+                                dataPenjualan.ajax.reload();
                             } else {
+                                $('.error-text').text('');
+                                $.each(response.msgField, function(prefix, val) {
+                                    $('#error-' + prefix).text(val[0]);
+                                });
                                 Swal.fire({
                                     icon: 'error',
-                                    title: 'Gagal',
+                                    title: 'Terjadi Kesalahan',
                                     text: response.message
                                 });
                             }
-                        }
+                        },
                     });
                     return false;
                 },
                 errorElement: 'span',
-                errorPlacement: function (error, element) {
+                errorPlacement: function(error, element) {
                     error.addClass('invalid-feedback');
                     element.closest('.form-group').append(error);
                 },
-                highlight: function (element) {
+                highlight: function(element, errorClass, validClass) {
                     $(element).addClass('is-invalid');
                 },
-                unhighlight: function (element) {
+                unhighlight: function(element, errorClass, validClass) {
                     $(element).removeClass('is-invalid');
                 }
             });
