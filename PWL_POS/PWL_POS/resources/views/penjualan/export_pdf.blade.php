@@ -97,18 +97,41 @@
                 <th class="text-center">Kode Penjualan</th>
                 <th class="text-center">Tanggal Penjualan</th>
                 <th class="text-center">Pembeli</th>
-                <th class="text-center">Pegawai</th>
+                <th class="text-center">Penginput</th>
+                <th class="text-center">Detail ID</th>
+                <th class="text-center">Barang ID</th>
+                <th class="text-center">Harga</th>
+                <th class="text-center">Jumlah</th>
+                <th class="text-center">Subtotal</th>
             </tr>
         </thead>
         <tbody>
             @foreach($penjualan as $b)
-            <tr>
-                <td class="text-center">{{ $loop->iteration }}</td>
-                <td>{{ $b->penjualan_kode }}</td>
-                <td>{{ $b->penjualan_tanggal }}</td>
-                <td>{{ $b->pembeli }}</td>
-                <td>{{ $b->user->username}}</td>
-            </tr>
+                @php
+                    $total = 0;
+                @endphp
+                @foreach($b->detail as $d)
+                    @php
+                        $subtotal = $d->harga * $d->jumlah;
+                        $total += $subtotal;
+                    @endphp
+                    <tr>
+                        <td class="text-center">{{ $loop->parent->iteration }}</td>
+                        <td>{{ $b->penjualan_kode }}</td>
+                        <td>{{ $b->penjualan_tanggal }}</td>
+                        <td>{{ $b->pembeli }}</td>
+                        <td>{{ $b->user->username}}</td>
+                        <td>{{ $d->detail_id }}</td>
+                        <td>{{ $d->barang->barang_nama }}</td>
+                        <td>Rp.{{ number_format($d->harga, 0, ',', '.') }}</td>
+                        <td>{{ $d->jumlah }}</td>
+                        <td>Rp.{{ number_format($subtotal, 0, ',', '.') }}</td>
+                    </tr>
+                @endforeach
+                <tr>
+                    <td colspan="9" class="text-end"><strong>Total</strong></td>
+                    <td><strong>Rp.{{ number_format($total, 0, ',', '.') }}</strong></td>
+                </tr>
             @endforeach
         </tbody>
     </table>

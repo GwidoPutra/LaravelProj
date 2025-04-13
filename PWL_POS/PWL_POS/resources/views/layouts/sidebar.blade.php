@@ -1,3 +1,6 @@
+@php
+    $activeMenu = $activeMenu ?? '';
+@endphp
 <div class="sidebar">
     <!-- SidebarSearch Form -->
     <div class="form-inline mt-2">

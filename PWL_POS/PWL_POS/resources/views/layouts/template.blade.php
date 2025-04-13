@@ -58,6 +58,9 @@
   @include('layouts.footer')
 </div>
 <!-- ./wrapper -->
+@php
+    $activeMenu = $activeMenu ?? '';
+@endphp
 
 <!-- jQuery -->
 <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
