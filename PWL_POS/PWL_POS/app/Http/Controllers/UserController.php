@@ -216,7 +216,8 @@ class UserController extends Controller
                 $image = $request->file('profile_picture');
                 $imageName = 'profile-' . $id . '.webp';
                 $image->storeAs('public/profile_pictures', $imageName);
-                $data['profile_picture'] = 'storage/profile_pictures/' . $imageName;
+                $data['picture_path'] = 'storage/profile_pictures/' . $imageName;
+                unset($data['profile_picture']);
             }
 
             UserModel::create($data);
@@ -238,6 +239,14 @@ class UserController extends Controller
         return view('user.edit_ajax', ['user' => $user, 'level' => $level]);
     }
 
+    public function edit_profile(string $id)
+    {
+        $user = UserModel::find($id);
+        $level = LevelModel::all();
+
+        return view('user.edit_profile', ['user' => $user, 'level' => $level]);
+    }
+
     public function update_ajax(Request $request, $id)
     {
         // cek apakah request dari ajax 
@@ -246,7 +255,7 @@ class UserController extends Controller
                 'level_id' => 'required|integer',
                 'username' => 'required|max:20|unique:m_user,username,' . $id . ',user_id',
                 'nama'     => 'required|max:100',
-                'password' => 'nullable|min:6|max:20',
+                'password' => 'nullable|min:5|max:20',
                 'profile_picture' => 'nullable|image|max:2048'
             ];
 
@@ -272,10 +281,9 @@ class UserController extends Controller
                     $image = $request->file('profile_picture');
                     $imageName = 'profile-' . $id . '.webp';
                     $image->storeAs('public/profile_pictures', $imageName);
-                    $data['profile_picture'] = 'storage/profile_pictures/' . $imageName;
+                    $data['picture_path'] = 'storage/profile_pictures/' . $imageName;
+                    unset($data['profile_picture']);
                 }
-
-
 
                 $check->update($data);
                 return response()->json([

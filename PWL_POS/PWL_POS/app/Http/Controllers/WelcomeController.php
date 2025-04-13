@@ -7,6 +7,8 @@ use App\Models\KategoriModel;
 use App\Models\BarangModel;
 use App\Models\SupplierModel;
 use App\Models\StokModel;
+use App\Models\PenjualanModel;
+
 
 
 class WelcomeController extends Controller
@@ -26,7 +28,7 @@ class WelcomeController extends Controller
         $jumlahBarang = BarangModel::count();
         $jumlahSupplier = SupplierModel::count();
         $jumlahStok = StokModel::count();
-    //    $jumlahTransaksiPenjualan = PenjualanModel::count();
+       $jumlahTransaksiPenjualan = PenjualanModel::count();
 
         $infoBoxes = [
             [
@@ -71,13 +73,13 @@ class WelcomeController extends Controller
                 'icon' => 'fa-archive',
                 'url' => url('/stok'),
             ],
-//            [
-  //              'title' => 'Transaksi Penjualan',
-    //            'count' => $jumlahTransaksiPenjualan,
-      //          'color' => 'primary',
-        //        'icon' => 'fa-cash-register',
-          //      'url' => url('/transaksi-penjualan'), 
-            //], 
+           [
+               'title' => 'Transaksi Penjualan',
+               'count' => $jumlahTransaksiPenjualan,
+               'color' => 'primary',
+               'icon' => 'fa-cash-register',
+               'url' => url('/penjualan'), 
+            ], 
         ];
 
 
