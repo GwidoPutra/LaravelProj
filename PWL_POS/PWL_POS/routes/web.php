@@ -6,8 +6,10 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\StokController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AuthorizeUser;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -116,17 +118,39 @@ Route::middleware(['auth'])->group(function () {
       Route::post('/supplier/list', [SupplierController::class, 'list']);
       Route::get('/supplier/create', [SupplierController::class, 'create']);
       Route::post('/supplier/', [SupplierController::class, 'store']);
-      Route::get('/supplier/create_ajax', [SupplierController::class, 'create_ajax']); 
+      Route::get('/supplier/create_ajax', [SupplierController::class, 'create_ajax']);
       Route::post('/supplier/ajax', [SupplierController::class, 'store_ajax']);
       Route::get('/supplier/{id}', [SupplierController::class, 'show']);
       Route::get('/supplier/{id}/show_ajax', [SupplierController::class, 'show_ajax']);
       Route::get('/supplier/{id}/edit', [SupplierController::class, 'edit']);
       Route::put('/supplier/{id}', [SupplierController::class, 'update']);
-      Route::get('/supplier/{id}/edit_ajax', [SupplierController::class, 'edit_ajax']); 
-      Route::put('/supplier/{id}/update_ajax', [SupplierController::class, 'update_ajax']); 
-      Route::get('/supplier/{id}/delete_ajax', [SupplierController::class, 'confirm_ajax']); 
-      Route::delete('/supplier/{id}/delete_ajax', [SupplierController::class, 'delete_ajax']); 
+      Route::get('/supplier/{id}/edit_ajax', [SupplierController::class, 'edit_ajax']);
+      Route::put('/supplier/{id}/update_ajax', [SupplierController::class, 'update_ajax']);
+      Route::get('/supplier/{id}/delete_ajax', [SupplierController::class, 'confirm_ajax']);
+      Route::delete('/supplier/{id}/delete_ajax', [SupplierController::class, 'delete_ajax']);
       Route::delete('/supplier/{id}', [SupplierController::class, 'destroy']);
+   });
+
+   Route::middleware(['authorize:ADM,MNG'])->group(function () {
+      Route::get('/stok', [StokController::class, 'index']);
+      Route::post('/stok/list', [StokController::class, 'list']);
+      Route::get('/stok/create', [StokController::class, 'create']);
+      Route::post('/stok/', [StokController::class, 'store']);
+      Route::get('/stok/create_ajax', [StokController::class, 'create_ajax']);
+      Route::post('/stok/ajax', [StokController::class, 'store_ajax']);
+      Route::get('/stok/{id}', [StokController::class, 'show']);
+      Route::get('/stok/{id}/edit', [StokController::class, 'edit']);
+      Route::put('/stok/{id}', [StokController::class, 'update']);
+      Route::get('/stok/{id}/show_ajax', [StokController::class, 'show_ajax']);
+      Route::get('/stok/{id}/edit_ajax', [StokController::class, 'edit_ajax']);
+      Route::put('/stok/{id}/update_ajax', [StokController::class, 'update_ajax']);
+      Route::get('/stok/{id}/delete_ajax', [StokController::class, 'confirm_ajax']);
+      Route::delete('/stok/{id}/delete_ajax', [StokController::class, 'delete_ajax']);
+      Route::delete('/stok/{id}', [StokController::class, 'destroy']);
+      Route::get('/stok/import', [StokController::class, 'import']);
+      Route::post('/stok/import_ajax', [StokController::class, 'import_ajax']);
+      Route::get('/stok/export_excel', [StokController::class, 'export_excel']);
+      Route::get('/stok/export_pdf', [StokController::class, 'export_pdf']);
    });
 
    Route::post('/logout', function () {
