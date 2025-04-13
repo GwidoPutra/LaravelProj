@@ -66,27 +66,35 @@ class PenjualanController extends Controller
     {
         // cek apakah request berupa ajax
         if ($request->ajax() || $request->wantsJson()) {
+    
+            // Ambil user_id dari user yang sedang login
+            $request->merge(['user_id' => Auth::user()->user_id]);
+    
+            // Validasi data
             $rules = [
                 'user_id' => 'required|exists:m_user,user_id',
                 'pembeli' => 'required|max:40',
                 'penjualan_kode' => 'required|max:20',
                 'penjualan_tanggal' => 'required|date',
             ];
-
+    
             $validator = Validator::make($request->all(), $rules);
-
+    
+            // Jika validasi gagal
             if ($validator->fails()) {
+                \Log::error('VALIDASI GAGAL:', $validator->errors()->toArray());
+    
                 return response()->json([
-                    'status' => false, // response status, false: error/gagal, true: berhasil
+                    'status' => false,
                     'message' => 'Validasi Gagal',
-                    'msgField' => $validator->errors() // pesan error validasi
+                    'msgField' => $validator->errors()
                 ]);
             }
-
+    
             try {
                 DB::beginTransaction();
     
-                // Simpan ke t_penjualan
+                // Simpan ke tabel t_penjualan
                 PenjualanModel::create([
                     'user_id' => $request->user_id,
                     'pembeli' => $request->pembeli,
@@ -109,8 +117,11 @@ class PenjualanController extends Controller
                 ]);
             }
         }
+    
+        // Jika bukan request ajax
         return redirect('/');
     }
+    
 
     public function edit_ajax($id)
     {
@@ -195,7 +206,6 @@ class PenjualanController extends Controller
 
     public function export_excel()
     {
-
         // ambil data barang yang akan di export
         $penjualan = PenjualanModel::select('user_id', 'pembeli', 'penjualan_kode', 'penjualan_tanggal')
             ->orderBy('user_id')
