@@ -27,6 +27,13 @@
             display: block;
         }
 
+        img {
+            width: auto;
+            height: 80px;
+            max-width: 150px;
+            max-height: 150px;
+        }
+
         .text-right {
             text-align: right;
         }
@@ -70,7 +77,7 @@
 <body>
     <table class="border-bottom-header">
         <tr>
-            <td width="15%" class="text-center"><img src="{{ asset('polinema.png') }}"></td>
+            <td width="15%" class="text-center"><img src="{{ asset('polinema-bw.png') }}"></td>            
             <td width="85%">
                 <span class="text-center d-block font-11 font-bold mb-1">KEMENTERIAN PENDIDIKAN, KEBUDAYAAN, RISET, DAN TEKNOLOGI</span>
                 <span class="text-center d-block font-13 font-bold mb-1">POLITEKNIK NEGERI MALANG</span>
