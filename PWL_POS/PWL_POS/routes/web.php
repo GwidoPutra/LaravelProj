@@ -7,6 +7,7 @@ use App\Http\Controllers\LevelController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\StokController;
+use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AuthorizeUser;
 
@@ -153,6 +154,27 @@ Route::middleware(['auth'])->group(function () {
       Route::get('/stok/export_pdf', [StokController::class, 'export_pdf']);
    });
 
+   Route::middleware(['authorize:ADM,MNG'])->group(function () {
+      Route::get('/penjualan', [PenjualanController::class, 'index']);
+      Route::post('/penjualan/list', [PenjualanController::class, 'list']);
+      Route::get('/penjualan/create', [PenjualanController::class, 'create']);
+      Route::post('/penjualan/', [PenjualanController::class, 'store']);
+      Route::get('/penjualan/create_ajax', [PenjualanController::class, 'create_ajax']);
+      Route::post('/penjualan/ajax', [PenjualanController::class, 'store_ajax']);
+      Route::get('/penjualan/{id}', [PenjualanController::class, 'show']);
+      Route::get('/penjualan/{id}/edit', [PenjualanController::class, 'edit']);
+      Route::put('/penjualan/{id}', [PenjualanController::class, 'update']);
+      Route::get('/penjualan/{id}/show_ajax', [PenjualanController::class, 'show_ajax']);
+      Route::get('/penjualan/{id}/edit_ajax', [PenjualanController::class, 'edit_ajax']);
+      Route::put('/penjualan/{id}/update_ajax', [PenjualanController::class, 'update_ajax']);
+      Route::get('/penjualan/{id}/delete_ajax', [PenjualanController::class, 'confirm_ajax']);
+      Route::delete('/penjualan/{id}/delete_ajax', [PenjualanController::class, 'delete_ajax']);
+      Route::delete('/penjualan/{id}', [PenjualanController::class, 'destroy']);
+      Route::get('/penjualan/import', [PenjualanController::class, 'import']);
+      Route::post('/penjualan/import_ajax', [PenjualanController::class, 'import_ajax']);
+      Route::get('/penjualan/export_excel', [PenjualanController::class, 'export_excel']);
+      Route::get('/penjualan/export_pdf', [PenjualanController::class, 'export_pdf']);
+   });
    Route::post('/logout', function () {
       Auth::logout();
       request()->session()->invalidate();
