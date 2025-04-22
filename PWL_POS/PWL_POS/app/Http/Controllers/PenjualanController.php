@@ -108,6 +108,10 @@ class PenjualanController extends Controller
                     'penjualan_kode' => $request->penjualan_kode,
                     'penjualan_tanggal' => $request->penjualan_tanggal,
                 ]);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 77deb46d1c9da750e108c244384f6145ad049e31
                 // Loop dan simpan ke t_penjualan_detail
                 foreach ($request->barang_id as $i => $barang_id) {
                     PenjualanDetailModel::create([
@@ -205,6 +209,10 @@ class PenjualanController extends Controller
             $penjualan = PenjualanModel::find($id);
             if ($penjualan) {
                 try {
+<<<<<<< HEAD
+=======
+                    // Hapus dulu semua detail yang terkait
+>>>>>>> 77deb46d1c9da750e108c244384f6145ad049e31
                     $penjualan->detail()->delete(); // Pastikan relasi 'detail' ada di model
                     // Baru hapus data induknya
                     $penjualan->delete();
@@ -228,6 +236,7 @@ class PenjualanController extends Controller
         return redirect('/');
     }
 
+<<<<<<< HEAD
     public function import()
     {
         return view('penjualan.import');
@@ -381,6 +390,8 @@ class PenjualanController extends Controller
         exit;
     }
 
+=======
+>>>>>>> 77deb46d1c9da750e108c244384f6145ad049e31
     public function export_pdf()
     {
         $penjualan = PenjualanModel::select('penjualan_id', 'user_id', 'pembeli', 'penjualan_kode', 'penjualan_tanggal')
