@@ -47,6 +47,7 @@ Route::put('barang/{barang}', [BarangController::class, 'update']);
 Route::delete('barang/{barang}', [BarangController::class, 'destroy']);
 
 Route::post('/register', App\Http\Controllers\Api\RegisterController::class)->name('register');
+Route::post('/register1', App\Http\Controllers\Api\RegisterController::class)->name('register1');
 Route::post('/login', App\Http\Controllers\Api\LoginController::class)->name('login');
 Route::post('/logout', App\Http\Controllers\Api\LogoutController::class)->name('logout');
 Route::middleware('auth:api')->get('/user', function (Request $request){
